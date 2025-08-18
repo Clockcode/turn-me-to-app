@@ -9,19 +9,6 @@ export default function Navigation() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const initAuth = async () => {
-      console.log("chad inside init auth")
-      const result = await handleRedirectResult();
-      if(result.success) {
-        console.log("chad success redirect")
-        setUser(result?.user || null);
-      }else {
-        console.log("chad no success", result)
-      }
-    };
-
-    initAuth();
-
     // Set up auth state listener
     const unsubscribe = onAuthStateChanged((user) => {
       console.log("chad state changed")
@@ -34,7 +21,10 @@ export default function Navigation() {
 
   const handleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      setLoading(true);
+      const user = await signInWithGoogle();
+      setUser(user?.user || null);
+      setLoading(false);
     } catch (error) {
       console.error("Error signing in:", error);
     }
@@ -60,7 +50,7 @@ export default function Navigation() {
       {!loading && (
         user ? (
           <div className="flex items-center gap-4">
-            <span>Welcome, {user.email}</span>
+            <span>Welcome, {user.displayName}</span>
             <button
               onClick={handleSignOut}
               className="px-4 py-2 bg-red-500 text-white rounded-md"

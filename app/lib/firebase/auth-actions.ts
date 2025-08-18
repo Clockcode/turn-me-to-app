@@ -3,6 +3,7 @@
 import {
   GoogleAuthProvider,
   signInWithRedirect,
+  signInWithPopup,
   getRedirectResult,
   signOut as firebaseSignOut,
   onAuthStateChanged as _onAuthStateChanged,
@@ -27,8 +28,7 @@ export async function signInWithGoogle() {
 
   try {
     console.log("will run sign in func");
-    await signInWithRedirect(auth, provider);
-    // Note: This code won't execute as signInWithRedirect redirects the page
+    return await signInWithPopup(auth, provider);
   } catch (error) {
     console.error("Error signing in with Google", error);
   }
