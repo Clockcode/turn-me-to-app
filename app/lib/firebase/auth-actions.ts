@@ -6,15 +6,17 @@ import {
   getRedirectResult,
   signOut as firebaseSignOut,
   onAuthStateChanged as _onAuthStateChanged,
-  onIdTokenChanged as _onIdTokenChanged
+  onIdTokenChanged as _onIdTokenChanged,
+  NextOrObserver,
+  User
 } from "firebase/auth";
 import { auth } from "./clientApp";
 
-export function onAuthStateChanged(cb) {
+export function onAuthStateChanged(cb : NextOrObserver<User>) {
   return _onAuthStateChanged(auth, cb);
 }
 
-export function onIdTokenChanged(cb) {
+export function onIdTokenChanged(cb : NextOrObserver<User>) {
   return _onIdTokenChanged(auth, cb);
 }
 

@@ -2,8 +2,6 @@
 import { User } from "firebase/auth";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import AuthButton from "./authButton";
-import { auth } from "../lib/firebase/clientApp";
 import { signInWithGoogle, handleRedirectResult, signOut, onAuthStateChanged } from "../lib/firebase/auth-actions";
 // import {getAuthenticatedAppForUser} from "../lib/firebase/serverApp"
 export default function Navigation() {
