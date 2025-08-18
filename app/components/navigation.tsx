@@ -3,53 +3,40 @@ import { User } from "firebase/auth";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import AuthButton from "./authButton";
-import {
-  getAuth,
-  signInWithRedirect,
-  GoogleAuthProvider,
-  getRedirectResult,
-  onAuthStateChanged,
-} from "firebase/auth";
 import { auth } from "../lib/firebase/clientApp";
+import { signInWithGoogle, handleRedirectResult, signOut, onAuthStateChanged } from "../lib/firebase/auth-actions";
 // import {getAuthenticatedAppForUser} from "../lib/firebase/serverApp"
 export default function Navigation() {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const provider = new GoogleAuthProvider();
-  // Start a sign in process for an unauthenticated user.
-  provider.addScope("profile");
-  provider.addScope("email");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // Handle redirect result when component mounts
-    const handleRedirect = async () => {
-      try {
-        const result = await getRedirectResult(auth);
-        if (result) {
-          console.log("User signed in:", result.user.email);
-        }
-      } catch (error) {
-        console.error("Error handling redirect:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const initAuth = async () => {
+  //     console.log("chad inside init auth")
+  //     const result = await handleRedirectResult();
+  //     if(result.success) {
+  //       console.log("chad success redirect")
+  //       setUser(result?.user || null);
+  //     }else {
+  //       console.log("chad no success", result)
+  //     }
+  //   };
 
-    handleRedirect();
+  //   initAuth();
 
-    // Set up auth state listener
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
+  //   // Set up auth state listener
+  //   const unsubscribe = onAuthStateChanged((user: User) => {
+  //     console.log("chad state changed")
+  //     setUser(user);
+  //     setLoading(false);
+  //   });
 
-    return () => unsubscribe(); // ✅ Cleanup listener
-  }, []);
+  //   return () => unsubscribe(); // ✅ Cleanup listener
+  // }, []);
 
   const handleSignIn = async () => {
     try {
-      const provider = new GoogleAuthProvider();
-      provider.addScope("profile");
-      provider.addScope("email");
-      await signInWithRedirect(auth, provider);
+      await signInWithGoogle();
     } catch (error) {
       console.error("Error signing in:", error);
     }
@@ -57,7 +44,7 @@ export default function Navigation() {
 
   const handleSignOut = async () => {
     try {
-      await signOut(auth);
+      await signOut();
     } catch (error) {
       console.error("Error signing out:", error);
     }

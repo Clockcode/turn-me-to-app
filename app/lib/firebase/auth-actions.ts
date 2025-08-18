@@ -20,11 +20,13 @@ export function onIdTokenChanged(cb) {
 
 export async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
+  provider.addScope("profile");
+  provider.addScope("email");
 
   try {
     console.log("will run sign in func");
     await signInWithRedirect(auth, provider);
-    console.log("Will run redirect result");
+    // Note: This code won't execute as signInWithRedirect redirects the page
   } catch (error) {
     console.error("Error signing in with Google", error);
   }

@@ -6,12 +6,14 @@ import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "default_key",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "turn-me-to-app.firebaseapp.com",
+  authDomain:
+    process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN ||
+    "turn-me-to-app.firebaseapp.com",
   projectId: "turn-me-to-app",
   storageBucket: "turn-me-to-app.firebasestorage.app",
   messagingSenderId: "123261115988",
   appId: "1:123261115988:web:99420b8be38943fe1b17c1",
-  measurementId: "G-732S7HB813"
+  measurementId: "G-732S7HB813",
 };
 
 // Validate required config
@@ -21,5 +23,4 @@ if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 export const auth = getAuth(app);
