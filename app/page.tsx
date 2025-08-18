@@ -3,8 +3,8 @@ import Link from "next/link"
 
 export default function Home() {
   return (
-    <div className="flex font-sans items-center justify-center pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col items-center">
+    <div className="flex font-sans items-center justify-center gap-16 sm:p-20 min-h-screen">
+      <main className="flex flex-col items-center min-h-full">
         <header className="flex flex-col align-items-center gap-6 w-full">
           <h1 className="text-8xl text-center font-bold">Turn me to</h1>
             <AnimatedText />
