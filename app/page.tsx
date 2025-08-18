@@ -1,4 +1,4 @@
-import AnimatedText from "./ui/animatedText";
+import AnimatedText from "./components/animatedText";
 import Link from "next/link"
 
 export default function Home() {

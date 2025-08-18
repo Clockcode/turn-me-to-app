@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FileUpload } from "./fileUpload";
+import { FileUpload } from "../components/fileUpload";
 export default function Page() {
   return (
     <main>
