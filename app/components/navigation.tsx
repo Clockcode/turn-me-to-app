@@ -8,29 +8,29 @@ export default function Navigation() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const initAuth = async () => {
-  //     console.log("chad inside init auth")
-  //     const result = await handleRedirectResult();
-  //     if(result.success) {
-  //       console.log("chad success redirect")
-  //       setUser(result?.user || null);
-  //     }else {
-  //       console.log("chad no success", result)
-  //     }
-  //   };
+  useEffect(() => {
+    const initAuth = async () => {
+      console.log("chad inside init auth")
+      const result = await handleRedirectResult();
+      if(result.success) {
+        console.log("chad success redirect")
+        setUser(result?.user || null);
+      }else {
+        console.log("chad no success", result)
+      }
+    };
 
-  //   initAuth();
+    initAuth();
 
-  //   // Set up auth state listener
-  //   const unsubscribe = onAuthStateChanged((user: User) => {
-  //     console.log("chad state changed")
-  //     setUser(user);
-  //     setLoading(false);
-  //   });
+    // Set up auth state listener
+    const unsubscribe = onAuthStateChanged((user) => {
+      console.log("chad state changed")
+      setUser(user);
+      setLoading(false);
+    });
 
-  //   return () => unsubscribe(); // ✅ Cleanup listener
-  // }, []);
+    return () => unsubscribe(); // ✅ Cleanup listener
+  }, []);
 
   const handleSignIn = async () => {
     try {
