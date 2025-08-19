@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 
 const reenieBeanie = Reenie_Beanie({
   variable: "--font-reenie-beanie",
+  subsets: ["latin"],
   weight: "400"
 })
 
