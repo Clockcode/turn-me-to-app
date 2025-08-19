@@ -49,11 +49,11 @@ export default function AnimatedText() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 mt-4">
+    <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-16 py-4 md">
       <div className="rounded-lg border-2 border-gray-200 w-30 h-30 relative">
         <Image src={style.imgLink} alt={style.alt} loading="lazy" fill={true} className="object-cover rounded-md" />
       </div>
-      <span className="text-5xl text-center h-20 font-bold">
+      <span className="font-reenie text-8xl text-center h-20 font-bold">
         {style.title}
       </span>
     </div>

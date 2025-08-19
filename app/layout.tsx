@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Navigation from "./components/navigation";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Reenie_Beanie } from "next/font/google";
 import "./globals.css";
 // import { getAuthenticatedAppForUser } from "./lib/firebase/serverApp";
 // import { getRedirectResult, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const reenieBeanie = Reenie_Beanie({
+  variable: "--font-reenie-beanie",
+  weight: "400"
+})
+
 export const metadata: Metadata = {
   title: "Turn me to anything",
   description: "Turn yourself into various styles",
@@ -26,12 +31,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const { currentUser } = await getAuthenticatedAppForUser();
-  // console.log(currentUser);
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${reenieBeanie.variable} antialiased`}
       >
         <Navigation />
         {children}
