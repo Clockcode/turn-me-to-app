@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Navigation from "./components/navigation";
 import { Geist, Geist_Mono, Reenie_Beanie } from "next/font/google";
 import "./globals.css";
-// import { getAuthenticatedAppForUser } from "./lib/firebase/serverApp";
-// import { getRedirectResult, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
-// import {auth} from "./lib/firebase/clientApp"
+import { getAuthenticatedAppForUser } from "./lib/firebase/serverApp";
+import { User } from "firebase/auth";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,12 +31,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { currentUser } : { currentUser: User | null } = await getAuthenticatedAppForUser();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${reenieBeanie.variable} antialiased`}
       >
-        <Navigation />
+        <Navigation initialUser={currentUser?.toJSON()} />
         {children}
       </body>
     </html>

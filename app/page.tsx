@@ -1,15 +1,54 @@
-import AnimatedText from "./components/animatedText";
-import Link from "next/link"
+"use client";
+
+import GetStarted from "./components/getStarted";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { texts } from "./lib/utils/constants";
 
 export default function Home() {
+  const [style, setStyle] = useState({
+    title: "Anything",
+    imgLink: "/images/simpsons.png",
+    alt: "anything",
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStyle((prevStyle) => {
+        const currentIndex = texts.indexOf(prevStyle);
+        const nextIndex =
+          currentIndex + 1 < texts.length ? currentIndex + 1 : 0;
+        return texts[nextIndex];
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
-    <div className="flex font-sans items-center justify-center gap-16 sm:p-20 min-h-screen">
-      <main className="flex flex-col items-center min-h-full">
-        <header className="flex flex-col align-items-center gap-6 w-full">
-          <h1 className="font-reenie text-9xl text-center font-bold">Turn me to</h1>
-            <AnimatedText />
+    <div className="flex font-sans justify-left md:justify-center pl-4 pr-2 min-h-screen">
+      <main className="flex flex-col items-left w-full md:w-4/6 min-h-full">
+        <header className="flex flex-col w-full">
+          <h1 className="font-reenie text-8xl text-left md:text-center font-bold">
+            Turn me to
+          </h1>
+          <div className="flex flex-row w-full items-center justify-left md:justify-center gap-4 mb-8 py-4">
+            <div className="rounded-lg border-2 border-gray-200 w-30 h-30 relative">
+              <Image
+                src={style.imgLink}
+                alt={style.alt}
+                loading="lazy"
+                fill={true}
+                className="object-cover rounded-md"
+              />
+            </div>
+            <span className="font-reenie align-center text-6xl text-left md:text-center h-20 font-bold">
+              {style.title}
+            </span>
+          </div>
         </header>
-        <Link href={"/studioghibli"} className="rounded-md text-lg bg-blue-600 text-white font-white px-8 py-4 align-center font-medium">Turn me to Studio Ghibli</Link>
+        <div className="flex w-full md:justify-center">
+          <GetStarted />
+        </div>
       </main>
     </div>
   );
