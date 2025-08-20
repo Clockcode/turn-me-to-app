@@ -53,7 +53,7 @@ export default function GetStarted() {
         ): (
           <button
           onClick={handleSignIn}
-          className="px-4 py-2 bg-blue-500 text-lg text-white rounded-md"
+          className="px-8 py-4 bg-blue-500 text-lg text-white rounded-md"
         >
           Get Started
         </button>

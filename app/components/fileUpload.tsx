@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-
+import { base64Image } from "../../public/exampleB64";
 
 type imageType = {
   preview: string;
@@ -32,15 +32,49 @@ export function FileUpload({ title }: { title: string }) {
   function handleInputUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e?.currentTarget.files?.[0];
     if (!file) return;
-    console.log("file", file)
+    console.log("file", file);
     const preview = URL.createObjectURL(file);
-    console.log("preview", preview)
+    console.log("preview", preview);
     if (image?.preview) URL.revokeObjectURL(image?.preview);
     setImage({ preview, file });
+
+  }
+
+  function handleDownload(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    if (!outB64) {
+      console.error("No image to download");
+      return;
+    }
+    // Step 1: Create the data URL
+    const dataUrl = `data:image/png;base64,${outB64}`;
+    // Step 2: Create a temporary anchor element
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = "image.png"; // You can change the filename if you want
+    // Step 3: Append, click, and remove the anchor
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
   return (
     <div className="flex flex-col">
+      {outB64 && (
+        <section className="flex flex-col w-4/5 max-w-120 m-auto h-auto items-center justify-center w-full h-84 mt-4">
+          <figure>
+            <figcaption className="font-reenie text-4xl font-bold text-center py-4">
+              You are turned to
+            </figcaption>
+            <img
+              src={`data:image/png;base64,${outB64}`}
+              alt="restyled"
+              className="w-full border-2 border-gray-300 border-dashed rounded-lg bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+            />
+            <button className="mt-8" onClick={handleDownload}>Download image</button>
+          </figure>
+        </section>
+      )}
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center text-center m-auto mt-12 w-4/5 max-w-120 relative"
@@ -104,24 +138,12 @@ export function FileUpload({ title }: { title: string }) {
 
         <button
           disabled={loading}
-          className="w-full mt-8 px-2 py-4 bg-blue-600 text-white rounded-md font-semibold"
+          className="mt-8"
           type="submit"
         >
           {loading ? "Styling" : `Turn me to ${title}`}
         </button>
       </form>
-      <section>
-        {outB64 && (
-          <figure>
-            <figcaption>You are turned to</figcaption>
-            <img
-              src={`data:image/png;base64,${outB64}`}
-              alt="restyled"
-              className="w-full h-auto border border-gray-300"
-            />
-          </figure>
-        )}
-      </section>
     </div>
   );
 }

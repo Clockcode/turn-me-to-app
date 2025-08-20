@@ -1,11 +1,11 @@
 "use client";
 import { useEffect } from "react";
 import Link from "next/link";
-import { User, onIdTokenChanged} from "firebase/auth"
+import { User, onIdTokenChanged } from "firebase/auth";
 import { setCookie, deleteCookie } from "cookies-next";
-import {auth} from "../lib/firebase/clientApp"
-import {signOut} from "../lib/firebase/auth-actions"
-import useAuthUser from "../lib/hooks/useAuthUser"
+import { auth } from "../lib/firebase/clientApp";
+import { signOut } from "../lib/firebase/auth-actions";
+import useAuthUser from "../lib/hooks/useAuthUser";
 
 function useUserSession(initialUser: any | undefined) {
   useEffect(() => {
@@ -15,7 +15,11 @@ function useUserSession(initialUser: any | undefined) {
   return initialUser;
 }
 
-export default function Navigation({initialUser}: {initialUser: any | undefined}) {
+export default function Navigation({
+  initialUser,
+}: {
+  initialUser: any | undefined;
+}) {
   const user = useUserSession(initialUser);
 
   const handleSignOut = async () => {
@@ -29,24 +33,26 @@ export default function Navigation({initialUser}: {initialUser: any | undefined}
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a
-          href="https://turnme.to"
+        <Link
+          href={"/"}
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <span className="font-reenie self-center text-4xl font-semibold whitespace-nowrap dark:text-white">
             turn me to
           </span>
-        </a>
+        </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {user && (          <div className="flex items-center gap-4">
-            <span>{user.displayName}</span>
-            <button
-              onClick={handleSignOut}
-              className="px-4 py-2 bg-red-500 text-white rounded-md"
-            >
-              Sign Out
-            </button>
-          </div>)}
+          {user && (
+            <div className="flex items-center gap-4">
+              <span>{user.displayName}</span>
+              <button
+                onClick={handleSignOut}
+                className="px-4 py-2 bg-red-500 text-white rounded-md"
+              >
+                Sign Out
+              </button>
+            </div>
+          )}
         </div>
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
