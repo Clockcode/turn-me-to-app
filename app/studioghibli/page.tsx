@@ -1,6 +1,14 @@
 import Image from "next/image";
 import { FileUpload } from "../components/fileUpload";
-export default function Page() {
+import { getAuthenticatedAppForUser } from "../lib/firebase/serverApp";
+import { redirect } from "next/navigation";
+export default async function Page() {
+  const { currentUser } = await getAuthenticatedAppForUser();
+
+  if(!currentUser) {
+    redirect("/");
+  }
+
   return (
     <main className="min-h-screen">
       <header className="px-8 pt-12">

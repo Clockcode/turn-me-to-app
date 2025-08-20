@@ -3,10 +3,10 @@ import { User } from "firebase/auth";
 import { useState, useEffect } from "react";
 import {
   signInWithGoogle,
-  signOut,
   onAuthStateChanged,
 } from "../lib/firebase/auth-actions";
 import Link from "next/link";
+
 export default function GetStarted() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
@@ -33,13 +33,6 @@ export default function GetStarted() {
     }
   };
 
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
   return (
     <>
       {!loading &&

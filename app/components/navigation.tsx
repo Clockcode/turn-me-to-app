@@ -1,26 +1,16 @@
 "use client";
 import { useEffect } from "react";
 import Link from "next/link";
-import { User, onIdTokenChanged } from "firebase/auth";
-import { setCookie, deleteCookie } from "cookies-next";
-import { auth } from "../lib/firebase/clientApp";
 import { signOut } from "../lib/firebase/auth-actions";
 import useAuthUser from "../lib/hooks/useAuthUser";
-
-function useUserSession(initialUser: any | undefined) {
-  useEffect(() => {
-    return useAuthUser(initialUser);
-  }, [initialUser]);
-
-  return initialUser;
-}
 
 export default function Navigation({
   initialUser,
 }: {
-  initialUser: any | undefined;
+  initialUser?:{uid?: string | null; displayName?: string | null};
 }) {
-  const user = useUserSession(initialUser);
+  useAuthUser(initialUser);
+  const user = initialUser;
 
   const handleSignOut = async () => {
     try {
