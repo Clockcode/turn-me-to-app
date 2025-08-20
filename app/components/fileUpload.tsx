@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { base64Image } from "../../public/exampleB64";
 
 type imageType = {
   preview: string;

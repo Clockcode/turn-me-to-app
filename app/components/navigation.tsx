@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from "react";
 import Link from "next/link";
 import { signOut } from "../lib/firebase/auth-actions";
 import useAuthUser from "../lib/hooks/useAuthUser";
