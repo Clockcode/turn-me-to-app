@@ -27,7 +27,6 @@ export async function signInWithGoogle() {
   provider.addScope("email");
 
   try {
-    console.log("will run sign in func");
     return await signInWithPopup(auth, provider);
   } catch (error) {
     console.error("Error signing in with Google", error);
@@ -38,9 +37,7 @@ export async function handleRedirectResult() {
   try {
     const result = await getRedirectResult(auth);
     if (result) {
-      console.log("Redirect result:", result);
       const user = result.user;
-      console.log("Auth state changed:", user?.email);
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
       return { success: true, user, token };

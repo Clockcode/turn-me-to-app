@@ -14,7 +14,6 @@ export default function GetStarted() {
   useEffect(() => {
     // Set up auth state listener
     const unsubscribe = onAuthStateChanged((user) => {
-      console.log("chad state changed");
       setUser(user);
       setLoading(false);
     });

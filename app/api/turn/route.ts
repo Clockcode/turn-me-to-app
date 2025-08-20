@@ -1,7 +1,6 @@
 "use server";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-import img from "../../../public/images/avatar.png";
 
 // export const runtime = "nodejs";
 const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
@@ -30,7 +29,6 @@ export async function POST(req: Request) {
     });
 
     const image = response.data?.[0];
-    console.log(image)
     if(!image) return NextResponse.json({error: "No image returned"}, {status: 500});
 
     return NextResponse.json({

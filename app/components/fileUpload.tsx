@@ -14,7 +14,6 @@ export function FileUpload({ title }: { title: string }) {
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    console.log("inside submit");
     e.preventDefault();
     setLoading(true);
     if (!image?.file) return;
@@ -31,9 +30,7 @@ export function FileUpload({ title }: { title: string }) {
   function handleInputUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e?.currentTarget.files?.[0];
     if (!file) return;
-    console.log("file", file);
     const preview = URL.createObjectURL(file);
-    console.log("preview", preview);
     if (image?.preview) URL.revokeObjectURL(image?.preview);
     setImage({ preview, file });
 
