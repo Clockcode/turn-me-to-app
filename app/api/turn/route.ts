@@ -37,11 +37,20 @@ export async function POST(req: Request) {
       ok: true,
       b64: image.b64_json ?? null
     })
-  } catch (e: any) {
+  } catch (e: unknown) {
+    // Type guard: check if e is an instance of Error before accessing .message
     console.error(e);
-    return NextResponse.json(
-      { error: e?.message ?? "unexpected error" },
-      { status: 500 }
-    );
+    if (e instanceof Error) {
+      return NextResponse.json(
+        { error: e.message },
+        { status: 500 }
+      );
+    } else {
+      // e is not an Error object, so handle it generically
+      return NextResponse.json(
+        { error: "unexpected error" },
+        { status: 500 }
+      );
+    }
   }
 }
