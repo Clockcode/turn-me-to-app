@@ -4,13 +4,19 @@ import GetStarted from "./components/getStarted";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { texts } from "./lib/utils/constants";
+import { useAuth } from "./providers/AuthProvider";
 
 export default function Home() {
   const [style, setStyle] = useState({
-    title: "Anything",
-    imgLink: "/images/simpsons.png",
-    alt: "anything",
+    title: "Studio Ghibli",
+    imgLink: "/images/ghibli.png",
+    alt: "studio ghibli",
   });
+
+  const auth = useAuth();
+  if (!auth) return <div>Loading...</div>;
+
+  const { user, loading } = auth;
 
   useEffect(() => {
     const interval = setInterval(() => {

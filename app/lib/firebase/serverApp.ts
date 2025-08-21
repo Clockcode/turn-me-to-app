@@ -1,20 +1,18 @@
-import "server-only"
+import "server-only";
 
-import { cookies } from "next/headers"
-import { initializeServerApp, initializeApp } from "firebase/app"
-import { getAuth } from "firebase/auth";
-import {firebaseConfig } from "./clientApp"
+import { cookies } from "next/headers";
+import { adminAuth } from "./adminApp";
 
-export async function getAuthenticatedAppForUser() {
-  const authIdToken = (await cookies()).get("__session")?.value;
+const NAME = process.env.SESSION_COOKIE_NAME || "__session";
 
-  // Firebase Server App is a new feature in the JS SDK that allows you to
-  // instantiate the SDK with credentials retrieved from the client & has
-  // other affordances for use in server environments.
-  const firebaseServerApp = initializeServerApp(initializeApp(firebaseConfig), {authIdToken})
-
-  const auth = getAuth(firebaseServerApp);
-  await auth.authStateReady()
-
-  return {firebaseServerApp, currentUser: auth.currentUser}
+export async function getServerUser() {
+  const cookie = (await cookies()).get(NAME)?.value;
+  if (!cookie) return null;
+  try {
+    // checkRevoked if you want stricter behavior:
+    const decoded = await adminAuth.verifySessionCookie(cookie, true);
+    return decoded; // has uid, email, claims, etc.
+  } catch {
+    return null;
+  }
 }

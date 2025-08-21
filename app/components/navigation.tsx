@@ -1,24 +1,13 @@
 "use client";
 import Link from "next/link";
-import { signOut } from "../lib/firebase/auth-actions";
-import useAuthUser from "../lib/hooks/useAuthUser";
+import { useAuth } from "../providers/AuthProvider";
 
-export default function Navigation({
-  initialUser,
-}: {
-  initialUser?:{uid?: string | null; displayName?: string | null};
-}) {
-  useAuthUser(initialUser);
-  const user = initialUser;
+export default function Navigation() {
+  const auth = useAuth()
+  if(!auth) return <div>Loading...</div>
+  const {user, loading, signOut} = auth
 
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
-
+  if(loading) return <>Loading...</>
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -35,7 +24,7 @@ export default function Navigation({
             <div className="flex items-center gap-4">
               <span>{user.displayName}</span>
               <button
-                onClick={handleSignOut}
+                onClick={signOut}
                 className="px-4 py-2 bg-red-500 text-white rounded-md"
               >
                 Sign Out

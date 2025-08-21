@@ -6,11 +6,6 @@ type styleObject = {
 
 export const texts: Array<styleObject> = [
   { title: "The Simpsons", imgLink: "/images/simpsons.png", alt: "simpsons" },
-  {
-    title: "Studio Ghibli",
-    imgLink: "/images/ghibli.png",
-    alt: "studio ghibli",
-  },
   { title: "The Sopranos", imgLink: "/images/sopranos.png", alt: "sopranos" },
   {
     title: "The Game of Thrones",
@@ -22,5 +17,10 @@ export const texts: Array<styleObject> = [
     title: "The Rick and Morty",
     imgLink: "/images/rickandmorty.png",
     alt: "rick and morty",
+  },
+  {
+    title: "Studio Ghibli",
+    imgLink: "/images/ghibli.png",
+    alt: "studio ghibli",
   },
 ];

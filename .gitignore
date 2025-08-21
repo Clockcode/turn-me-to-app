@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+turn-me-to-app-firebase-adminsdk*
 
 # debug
 npm-debug.log*
