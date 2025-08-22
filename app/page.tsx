@@ -12,12 +12,6 @@ export default function Home() {
     imgLink: "/images/ghibli.png",
     alt: "studio ghibli",
   });
-
-  const auth = useAuth();
-  if (!auth) return <div>Loading...</div>;
-
-  const { user, loading } = auth;
-
   useEffect(() => {
     const interval = setInterval(() => {
       setStyle((prevStyle) => {
@@ -30,6 +24,12 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const auth = useAuth();
+  if (!auth) return <div>Loading...</div>;
+
+  const { user, loading } = auth;
+
   return (
     <div className="flex font-sans justify-left md:justify-center pl-4 pr-2 min-h-screen">
       <main className="flex flex-col items-left w-full md:w-4/6 min-h-full">

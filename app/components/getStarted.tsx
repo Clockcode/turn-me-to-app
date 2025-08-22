@@ -23,7 +23,7 @@ export default function GetStarted() {
         ): (
           <button
           onClick={signInWithGoogle}
-          className="px-8 py-4 bg-blue-500 text-lg text-white rounded-md"
+          className="primary-button"
         >
           Get Started
         </button>

@@ -26,14 +26,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-button {
-  width: 100%;
+
+.primary-button {
   padding: 1rem 2rem;
-  /* To use Tailwind's blue-600, you can define a CSS variable and use it here: */
-  /* This is Tailwind's blue-600 hex value */
-  --tw-blue-600: #2563eb;
-  background-color: var(--tw-blue-600);
+  background-color: #2563eb;
   color: #ededed;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.secondary-button {
+  padding: 1rem 2rem;
+  border: 1px solid #2563eb;
+  color: #2563eb;
   border-radius: 8px;
   font-weight: 600;
 }

@@ -1,7 +1,7 @@
 "use server"
 
 import Image from "next/image";
-import { FileUpload } from "../components/fileUpload";
+import { TurnImage } from "../components/turnImage";
 import { getServerUser } from "../lib/firebase/serverApp";
 import { redirect } from "next/navigation";
 export default async function Page() {
@@ -12,7 +12,7 @@ export default async function Page() {
     <main className="min-h-screen">
       <header className="px-8 pt-12">
         <div className="flex items-center gap-4 justify-center">
-          <div className="rounded-lg border-2 border-gray-200 w-15 h-15 relative">
+          <div className="rounded-lg border-2 border-gray-200 w-20 h-20 lg:w-30 lg:h-30 relative">
             <Image
               src={"/images/ghibli.png"}
               alt={"studio ghibli"}
@@ -21,10 +21,10 @@ export default async function Page() {
               className="object-cover rounded-md"
             />
           </div>
-          <h1 className="text-4xl font-bold align-center">Studio Ghibli</h1>
+          <h1 className="text-5xl lg:text-6xl font-bold align-center">Studio Ghibli</h1>
         </div>
       </header>
-      <FileUpload title="Studio Ghibli"/>
+      <TurnImage title="Studio Ghibli"/>
     </main>
   );
 }

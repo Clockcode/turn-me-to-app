@@ -8,13 +8,13 @@ export const texts: Array<styleObject> = [
   { title: "The Simpsons", imgLink: "/images/simpsons.png", alt: "simpsons" },
   { title: "The Sopranos", imgLink: "/images/sopranos.png", alt: "sopranos" },
   {
-    title: "The Game of Thrones",
+    title: "Game of Thrones",
     imgLink: "/images/got.png",
     alt: "game of thrones",
   },
-  { title: "The Avatar", imgLink: "/images/avatar.png", alt: "avatar" },
+  { title: "Avatar", imgLink: "/images/avatar.png", alt: "avatar" },
   {
-    title: "The Rick and Morty",
+    title: "Rick and Morty",
     imgLink: "/images/rickandmorty.png",
     alt: "rick and morty",
   },

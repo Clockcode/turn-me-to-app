@@ -9,6 +9,9 @@ export async function POST(req: Request) {
   try {
     const formData = await req.formData();
     const file = formData?.get("image") as File;
+    const formPrompt = formData?.get("prompt") as string;
+    const defaultPrompt = "Turn this photo to studio ghibli version. Make sure to stay consistent to the character's facial features and the positions of them in the reference image.";
+    const prompt : string = formPrompt ?? defaultPrompt;
 
     if (!file)
       return NextResponse.json({ error: "No file Uploaded" }, { status: 400 });
@@ -24,7 +27,7 @@ export async function POST(req: Request) {
     const response = await client.images.edit({
       model: "gpt-image-1",
       image: file,
-      prompt: "Turn this photo to studio ghibli version. Make sure to stay consistent to the character's facial features and the positions of them in the reference image.",
+      prompt: prompt,
       size: "auto"
     });
 
