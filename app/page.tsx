@@ -5,11 +5,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { texts } from "./lib/utils/constants";
 import { useAuth } from "./providers/AuthProvider";
+import { FocusCards } from "./components/focus-cards";
 
 export default function Home() {
   const [style, setStyle] = useState({
     title: "Studio Ghibli",
-    imgLink: "/images/ghibli.png",
+    src: "/images/ghibli.png",
     alt: "studio ghibli",
   });
   useEffect(() => {
@@ -32,15 +33,15 @@ export default function Home() {
 
   return (
     <div className="flex font-sans justify-left md:justify-center pl-4 pr-2 min-h-screen">
-      <main className="flex flex-col items-left w-full md:w-4/6 min-h-full">
-        <header className="flex flex-col w-full">
+      <main className="flex flex-col items-left w-full">
+        <header className="flex flex-col w-full md:w-4/6 m-auto">
           <h1 className="font-reenie text-8xl text-left md:text-center font-bold">
             Turn me to
           </h1>
           <div className="flex flex-row w-full items-center justify-left md:justify-center gap-4 mb-8 py-4">
             <div className="rounded-lg border-2 border-gray-200 w-30 h-30 relative">
               <Image
-                src={style.imgLink}
+                src={style.src}
                 alt={style.alt}
                 loading="lazy"
                 fill={true}
@@ -52,10 +53,12 @@ export default function Home() {
             </span>
           </div>
         </header>
-        <div className="flex w-full md:justify-center">
+        <div className="flex w-full md:justify-center mb-4">
           <GetStarted />
         </div>
-      </main>
+
+        <FocusCards cards={texts} />
+        </main>
     </div>
   );
 }

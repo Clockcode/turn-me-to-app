@@ -1,26 +1,47 @@
 type styleObject = {
   title: string;
-  imgLink: string;
+  src: string;
   alt: string;
 };
 
 export const texts: Array<styleObject> = [
-  { title: "The Simpsons", imgLink: "/images/simpsons.png", alt: "simpsons" },
-  { title: "The Sopranos", imgLink: "/images/sopranos.png", alt: "sopranos" },
+  { title: "The Simpsons", src: "/images/simpsons.png", alt: "simpsons" },
+  { title: "The Sopranos", src: "/images/sopranos.png", alt: "sopranos" },
   {
     title: "Game of Thrones",
-    imgLink: "/images/got.png",
+    src: "/images/got.png",
     alt: "game of thrones",
   },
-  { title: "Avatar", imgLink: "/images/avatar.png", alt: "avatar" },
+  { title: "Avatar", src: "/images/avatar.png", alt: "avatar" },
   {
     title: "Rick and Morty",
-    imgLink: "/images/rickandmorty.png",
+    src: "/images/rickandmorty.png",
     alt: "rick and morty",
   },
   {
     title: "Studio Ghibli",
-    imgLink: "/images/ghibli.png",
+    src: "/images/ghibli.png",
+    alt: "studio ghibli",
+  },
+];
+
+const cards = [
+  { title: "The Simpsons", src: "/images/simpsons.png", alt: "simpsons" },
+  { title: "The Sopranos", src: "/images/sopranos.png", alt: "sopranos" },
+  {
+    title: "Game of Thrones",
+    src: "/images/got.png",
+    alt: "game of thrones",
+  },
+  { title: "Avatar", src: "/images/avatar.png", alt: "avatar" },
+  {
+    title: "Rick and Morty",
+    src: "/images/rickandmorty.png",
+    alt: "rick and morty",
+  },
+  {
+    title: "Studio Ghibli",
+    src: "/images/ghibli.png",
     alt: "studio ghibli",
   },
 ];

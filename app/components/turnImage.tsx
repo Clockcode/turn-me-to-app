@@ -55,7 +55,7 @@ function Modal({
   );
 }
 
-export function TurnImage({ title }: { title: string }) {
+export function TurnImage({ title, defaultPrompt }: { title: string, defaultPrompt: string }) {
   const [image, setImage] = useState<imageType | null>(null);
   const [outputImage, setOutputImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -73,6 +73,7 @@ export function TurnImage({ title }: { title: string }) {
     if (!image?.file) return;
     const formData = new FormData(e.currentTarget);
     formData.append("image", image.file);
+    formData.append("prompt", defaultPrompt)
     const res = await fetch("/api/turn", { method: "POST", body: formData });
     const data = await res.json();
     setLoading(false);
@@ -126,12 +127,6 @@ export function TurnImage({ title }: { title: string }) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }
-
-  function handlePromptSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    if (!outputImage) setIsModalOpen(false);
   }
 
   return (

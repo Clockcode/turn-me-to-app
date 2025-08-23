@@ -24,7 +24,7 @@ export default async function Page() {
           <h1 className="text-5xl lg:text-6xl font-bold align-center">Studio Ghibli</h1>
         </div>
       </header>
-      <TurnImage title="Studio Ghibli"/>
+      <TurnImage title="Studio Ghibli" defaultPrompt="Turn this photo to studio ghibli version. Make sure to stay consistent to the character's facial features and the positions of them in the reference image."/>
     </main>
   );
 }
