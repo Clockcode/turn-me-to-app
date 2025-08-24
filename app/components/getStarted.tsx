@@ -13,14 +13,7 @@ export default function GetStarted() {
   return (
     <>
       {!loading &&
-        (user ? (
-          <Link
-          href={"/studioghibli"}
-          className="rounded-md text-lg bg-blue-600 text-white font-white px-8 py-4 align-center font-medium"
-        >
-          Turn me to Studio Ghibli
-        </Link>
-        ): (
+        (!user && (
           <button
           onClick={signInWithGoogle}
           className="primary-button"

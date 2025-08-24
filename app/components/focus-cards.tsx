@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils/utils";
+import { redirect } from "next/navigation";
 
 export const Card = React.memo(
   ({
@@ -10,7 +11,7 @@ export const Card = React.memo(
     hovered,
     setHovered,
   }: {
-    card: any;
+    card: Card;
     index: number;
     hovered: number | null;
     setHovered: React.Dispatch<React.SetStateAction<number | null>>;
@@ -18,14 +19,15 @@ export const Card = React.memo(
     <div
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
+      onClick={() => redirect(`${card.url}`)}
       className={cn(
-        "rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out",
+        "w-70 h-78 md:h-96 rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden transition-all duration-300 ease-out",
       )}
     >
       <img
         src={card.src}
         alt={card.title}
-        className="object-cover absolute inset-0"
+        className="object-contain absolute inset-0 h-full"
       />
       <div
         className={cn(
@@ -46,13 +48,17 @@ Card.displayName = "Card";
 type Card = {
   title: string;
   src: string;
+  url: string;
 };
 
 export function FocusCards({ cards }: { cards: Card[] }) {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
+    <div
+    // className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 max-w-7xl mx-auto md:px-8 w-full"
+    className="flex flex-row gap-4 flex-wrap max-w-8xl mx-auto justify-left"
+    >
       {cards.map((card, index) => (
         <Card
           key={card.title}

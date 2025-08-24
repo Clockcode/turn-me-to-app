@@ -3,7 +3,7 @@
 import GetStarted from "./components/getStarted";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { texts } from "./lib/utils/constants";
+import { texts , cards} from "./lib/utils/constants";
 import { useAuth } from "./providers/AuthProvider";
 import { FocusCards } from "./components/focus-cards";
 
@@ -57,7 +57,7 @@ export default function Home() {
           <GetStarted />
         </div>
 
-        <FocusCards cards={texts} />
+        <FocusCards cards={cards} />
         </main>
     </div>
   );
