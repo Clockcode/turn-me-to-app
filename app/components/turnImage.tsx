@@ -20,7 +20,7 @@ function Modal({
 }: {
   open: boolean;
   title: string;
-  onClose: () => {};
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
 }) {
   if (!open) return null;
@@ -31,7 +31,7 @@ function Modal({
       // aria-model="true"
       aria-labelledby="modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-      onClick={onClose} // close when clicking background
+      // onClick={onClose} // close when clicking background
     >
       <div
         className="relative m-auto bg-white dark:bg-gray-800 rounded-lg shadow-xl w-[90vw] max-w-xl p-4"
@@ -86,7 +86,6 @@ export function TurnImage({ title, defaultPrompt }: { title: string, defaultProm
     e.preventDefault();
     setLoading(true);
     if (!outputImage || !prompt) {
-      setIsModalOpen(false);
       console.error("output image or prompt doesn't exist");
     } else {
       const formData = new FormData(e.currentTarget);
@@ -98,9 +97,9 @@ export function TurnImage({ title, defaultPrompt }: { title: string, defaultProm
       setLoading(false);
       if (!res.ok) console.error("request failed");
       setOutputImage(data.b64 ?? null);
-      setIsModalOpen(false);
       setprompt("");
     }
+    setIsModalOpen(false);
   }
 
   function handleInputUpload(e: React.ChangeEvent<HTMLInputElement>) {
